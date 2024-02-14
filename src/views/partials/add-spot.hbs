@@ -1,0 +1,28 @@
+<section class="content box has-background-success-light">
+  <form action="/dashboard/addspot" method="POST">
+    <label class="label">New Spot:</label>
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <input class="input is-success" type="text" placeholder="Enter name" name="name" />
+        </div>
+        <div class="control">
+          <div class="select">
+            <select class="input is-success" name="category">
+              <option value="Spot">Choose Category</option>
+              <option value="Landmark">Landmark</option>
+              <option value="Scenery">Scenery</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Attraction">Attraction</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <input class="input is-success" type="text" placeholder="Enter description" name="description" />
+        </div>
+      </div>
+    </div>
+    <button class="button is-primary">Add Spot</button>
+  </form>
+</section>
