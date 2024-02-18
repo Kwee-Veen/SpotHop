@@ -9,9 +9,11 @@
     "lint": "eslint . --ext .js",
     "test": "mocha --ui tdd test/**.js -exit"
   },
+  "test": "mocha --ui tdd test/**/*.js -exit",
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "axios": "^1.6.7",
     "chai": "^5.0.3",
     "dotenv": "^16.4.1",
     "eslint": "^8.56.0",
@@ -24,6 +26,7 @@
     "prettier": "^3.2.4"
   },
   "dependencies": {
+    "@hapi/boom": "^10.0.1",
     "@hapi/cookie": "^12.0.1",
     "@hapi/hapi": "^21.3.2",
     "@hapi/vision": "^7.0.3",

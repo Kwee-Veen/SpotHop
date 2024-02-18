@@ -14,9 +14,12 @@ export const userMemStore = {
   },
 
   async getUserById(id) {
-    let u = users.find((user) => user._id === id);
-    if (u === undefined) u = null;
-    return u;
+    if (id) { 
+      let u = users.find((user) => user._id === id);
+      if (u === undefined) u = null;
+      return u; 
+    } 
+    return null
   },
 
   async getUserByEmail(email) {
