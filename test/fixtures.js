@@ -28,44 +28,34 @@ export const testUsers = [
   },
 ];
 
-// TODO: Introduce relevant fixtures
+export const testSpot = {
+  spotName: "Jogutenmangu",
+  description: "Japanese Shinto shrine to the god Tenjin, incidently right next to where I lived in Japan",
+  category: "ReligiousSite",
+  latitude: 34.85823,
+  longitude: 135.61770,
+};
 
-// export const rock = {
-//   title: "rock",
-// };
-
-// export const testPlaylists = [
-//   {
-//     title: "test1",
-//   },
-//   {
-//     title: "test2",
-//   },
-//   {
-//     title: "test3",
-//   },
-// ];
-
-// export const bohemianRhapsody = {
-//     title: "Bohemian Rhapsody",
-//     artist: "Queen",
-//     duration: 5.55,
-// };
-
-// export const testTracks = [
-//   {
-//     title: "testTrack1",
-//     artist: "bestBoi1",
-//     duration: 5,
-//   },
-//   {
-//     title: "testTrack2",
-//     artist: "bestBoi2",
-//     duration: 6,
-//   },
-//   {
-//     title: "testTrack3",
-//     artist: "bestBoi3",
-//     duration: 7,
-//   },
-// ];
+export const spotsGroup = [
+  {
+    spotName: "Akashi-Kaikyo Bridge",
+    description: "One of the world's longest suspension bridges, connecting the Japanese mainland with Awaji island",
+    category: "Structure",
+    latitude: 34.62029,
+    longitude: 135.02227,
+  },
+  {
+    spotName: "Whistler",
+    description: "A town north of Vancouver, Canada, hosting one of the largest ski resorts in North America, the mountains of Whistler & Blackcomb",
+    category: "Locale",
+    latitude: 50.11615,
+    longitude: -122.95349,
+  },
+  {
+    spotName: "Youghal",
+    description: "Keep driving I'd say",
+    category: "Locale",
+    latitude: 51.95430,
+    longitude: -7.84697,
+  },
+];

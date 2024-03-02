@@ -38,7 +38,7 @@ export const userMemStore = {
   },
 
   async updateUser(oldUserData, updatedUserData) {
-    const user = users.find((user) => user._id === oldUserData._id);
+    let user = users.find((user) => user._id === oldUserData._id);
     user.firstName = updatedUserData.firstName;
     user.lastName = updatedUserData.lastName;
     user.email = updatedUserData.email;

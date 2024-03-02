@@ -122,3 +122,5 @@ dist
 .pnp.*
 
 .env
+
+src/models/json/db.json

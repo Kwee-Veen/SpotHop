@@ -49,7 +49,7 @@ async function init() {
     layout: true,
     isCached: false,
   });
-  db.init();
+  db.init("json");
   server.route(apiRoutes);
   server.route(webRoutes);
   await server.start();

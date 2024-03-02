@@ -9,14 +9,9 @@ export const spotMemStore = {
 
   async addSpot(spot) {
     spot._id = v4();
-    // spot.playlistid = playlistId;    NOTE: in controller should have userid assigned
     spots.push(spot);
     return spot;
   },
-
-//   async getSpotsByPlaylistId(id) {
-//     return spots.filter((spot) => spot.playlistid === id);
-//   },
 
   async getSpotById(id) {
     let foundSpot = spots.find((spot) => spot._id === id);
@@ -44,7 +39,6 @@ export const spotMemStore = {
     spots = [];
   },
 
-  // what properties for a spot? address this later
 //   async updateSpot(spot, updatedSpot) {
 //     spot.title = updatedSpot.title;
 //     spot.artist = updatedSpot.artist;

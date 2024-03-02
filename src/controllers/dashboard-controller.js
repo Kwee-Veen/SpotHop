@@ -32,6 +32,8 @@ export const dashboardController = {
         name: request.payload.name,
         category: request.payload.category,
         description: request.payload.description,
+        latitude: request.payload.latitude,
+        longitude: request.payload.longitude,
       };
       await db.spotStore.addSpot(newSpot);
       return h.redirect("/dashboard");

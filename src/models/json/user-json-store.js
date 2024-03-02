@@ -1,5 +1,3 @@
-// TODO: Refactor where appropriate - not tested
-
 import { v4 } from "uuid";
 import { db } from "./store-utils.js";
 
@@ -18,10 +16,13 @@ export const userJsonStore = {
   },
 
   async getUserById(id) {
-    await db.read();
-    let u = db.data.users.find((user) => user._id === id);
-    if (u === undefined) u = null;
-    return u;
+    if (id) { 
+      await db.read();
+      let u = db.data.users.find((user) => user._id === id);
+      if (u === undefined) u = null;
+      return u;
+    }
+    return null
   },
 
   async getUserByEmail(email) {
@@ -41,5 +42,16 @@ export const userJsonStore = {
   async deleteAll() {
     db.data.users = [];
     await db.write();
+  },
+
+  async updateUser(oldUserData, updatedUserData) {
+    await db.read();
+    let user = db.data.users.find((user) => user._id === oldUserData._id);
+    user.firstName = updatedUserData.firstName;
+    user.lastName = updatedUserData.lastName;
+    user.email = updatedUserData.email;
+    user.password = updatedUserData.password;
+    await db.write();
+    return user;
   },
 };

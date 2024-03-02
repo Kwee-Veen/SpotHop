@@ -28,5 +28,7 @@ export const SpotSpec = {
   name: Joi.string().required(),
   category: Joi.string().allow("").optional(),
   description: Joi.string().allow("").optional(),
+  latitude: Joi.string().allow("").required(),
+  longitude: Joi.string().allow("").required(),
   // TODO: location, weather(or computed?), images
 };

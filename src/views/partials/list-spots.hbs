@@ -4,7 +4,7 @@
       <tr>
         <th>Name</th>
         <th>Category</th>
-        <th>Description</th>
+        <th>Coordinates</th>
         <th><tag class="has-text-info"> Edit</tag></th>
         <th><tag class="has-text-danger">Delete</tag></th>
       </tr>
@@ -19,7 +19,7 @@
             {{category}}
           </td>
           <td>
-            {{description}}
+            {{latitude}}, {{longitude}}
           </td>
           <td>
             <a href="/spot/{{_id}}" class="button">
@@ -46,6 +46,11 @@
                 </svg>
               </span>
             </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Description:</b> {{description}}
           </td>
         </tr>
       {{/each}}
