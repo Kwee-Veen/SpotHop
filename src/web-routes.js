@@ -21,7 +21,8 @@ export const webRoutes = [
   { method: "POST", path: "/spot/{id}/editspot", config: spotController.editSpot },
 
   { method: "GET", path: "/accountDetailsIndex", config: accountsController.accountDetailsIndex },
-  { method: "POST", path: "/modifyaccount", config: accountsController.modifyAccount },
+  { method: "POST", path: "/modifyaccount/{id}", config: accountsController.modifyAccount },
+  { method: "POST", path: "/deleteaccount/{id}", config: accountsController.deleteUser },
 
   // FIXME: create catch-all route, e.g.
   // { method: "GET", path: "*", config: accountsController.index },

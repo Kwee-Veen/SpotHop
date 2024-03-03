@@ -1,12 +1,4 @@
 {
-  "users": [
-    {
-      "firstName": "a",
-      "lastName": "a",
-      "email": "a@a.com",
-      "password": "a",
-      "_id": "6d93d883-0b7a-4c4d-aeb4-9c7bc88ac62b"
-    }
-  ],
+  "users": [],
   "spots": []
 }

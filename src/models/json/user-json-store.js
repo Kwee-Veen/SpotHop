@@ -7,8 +7,14 @@ export const userJsonStore = {
     return db.data.users;
   },
 
+  // The first user to be inputted into the database will be designated the admin.
   async addUser(user) {
     await db.read();
+    const userList = await this.getAllUsers();
+    if (userList.length <= 0) {
+      user.admin = true;
+    }
+    else user.admin = false;
     user._id = v4();
     db.data.users.push(user);
     await db.write();
@@ -44,9 +50,9 @@ export const userJsonStore = {
     await db.write();
   },
 
-  async updateUser(oldUserData, updatedUserData) {
+  async updateUser(id, updatedUserData) {
     await db.read();
-    let user = db.data.users.find((user) => user._id === oldUserData._id);
+    let user = db.data.users.find((user) => user._id === id);
     user.firstName = updatedUserData.firstName;
     user.lastName = updatedUserData.lastName;
     user.email = updatedUserData.email;
