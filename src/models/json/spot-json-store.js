@@ -9,7 +9,9 @@ export const spotJsonStore = {
 
   async addSpot(spot) {
     await db.read();
-    spot._id = v4();
+    if (!spot._id) {
+      spot._id = v4();
+    }
     db.data.spots.push(spot);
     await db.write();
     return spot;
@@ -64,9 +66,30 @@ export const spotJsonStore = {
     await db.write();
   },
 
-//   async updateSpot(spot, updatedSpot) {
-//     spot.title = updatedSpot.title;
-//     spot.artist = updatedSpot.artist;
-//     spot.duration = updatedSpot.duration;
-//   },
+  async editSpot(originalSpot, updatedSpot) {
+    await db.read();
+    if (!updatedSpot.name) {
+      updatedSpot.name  = originalSpot.name;
+    };
+    if (!updatedSpot.description) {
+      updatedSpot.description  = originalSpot.description;
+    };
+    if (!updatedSpot.category) {
+      updatedSpot.category  = originalSpot.category;
+    };
+    if (!updatedSpot.latitude) {
+      updatedSpot.latitude  = originalSpot.latitude;
+    };
+    if (!updatedSpot.longitude) {
+      updatedSpot.longitude  = originalSpot.longitude;
+    }
+    console.log("Original ID: " + JSON.stringify(originalSpot._id));
+    console.log("Updated ID (shouldn't be defined yet): " + JSON.stringify(updatedSpot._id));
+    updatedSpot.userid = originalSpot.userid,
+    updatedSpot._id = originalSpot._id,
+    console.log("Updated ID: " + JSON.stringify(updatedSpot._id));
+    await this.deleteSpot(originalSpot._id);
+    await this.addSpot(updatedSpot);
+    return updatedSpot
+  },
 };

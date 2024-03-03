@@ -18,7 +18,7 @@ export const webRoutes = [
   { method: "GET", path: "/dashboard/{id}/deletespot", config: dashboardController.deleteSpot },
 
   { method: "GET", path: "/spot/{id}", config: spotController.index },
-  // { method: "POST", path: "/spot/{id}/editspot", config: spotController.editSpot },
+  { method: "POST", path: "/spot/{id}/editspot", config: spotController.editSpot },
 
   { method: "GET", path: "/accountDetailsIndex", config: accountsController.accountDetailsIndex },
   { method: "POST", path: "/modifyaccount", config: accountsController.modifyAccount },

@@ -34,13 +34,10 @@ suite("Spot Model tests", () => {
         assert.deepEqual(inputSpot, returnedSpot1);
     });
 
-    test("get spots by category - success", async () => {
-        const returnedSpots = await db.spotStore.getSpotsByCategory(spotsGroup[1]);
+    test("get spots by category, location - success", async () => {
+        let returnedSpots = await db.spotStore.getSpotsByCategory(spotsGroup[1]);
         assert.equal(returnedSpots.length, 2);
-    });
-
-    test("get spots by location - success", async () => {
-        const returnedSpots = await db.spotStore.getSpotsByLocation(spotsGroup[0]);
+        returnedSpots = await db.spotStore.getSpotsByLocation(spotsGroup[0]);
         assert.equal(returnedSpots.length, 1);
     });
 
@@ -68,4 +65,11 @@ suite("Spot Model tests", () => {
         assert.equal(spotsGroup.length, allSpots.length);
         await db.spotStore.deleteAllSpots();
     });
+
+    test("edit a spot - success", async () => {
+        const returnedSpots = await db.spotStore.editSpot(spotsGroup[0], testSpot);
+        assert.deepEqual(returnedSpots, testSpot);
+        await db.spotStore.deleteAllSpots();
+    });
+
 });

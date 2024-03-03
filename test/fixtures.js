@@ -29,7 +29,7 @@ export const testUsers = [
 ];
 
 export const testSpot = {
-  spotName: "Jogutenmangu",
+  name: "Jogutenmangu",
   description: "Japanese Shinto shrine to the god Tenjin, incidently right next to where I lived in Japan",
   category: "ReligiousSite",
   latitude: 34.85823,
@@ -38,21 +38,21 @@ export const testSpot = {
 
 export const spotsGroup = [
   {
-    spotName: "Akashi-Kaikyo Bridge",
+    name: "Akashi-Kaikyo Bridge",
     description: "One of the world's longest suspension bridges, connecting the Japanese mainland with Awaji island",
     category: "Structure",
     latitude: 34.62029,
     longitude: 135.02227,
   },
   {
-    spotName: "Whistler",
+    name: "Whistler",
     description: "A town north of Vancouver, Canada, hosting one of the largest ski resorts in North America, the mountains of Whistler & Blackcomb",
     category: "Locale",
     latitude: 50.11615,
     longitude: -122.95349,
   },
   {
-    spotName: "Youghal",
+    name: "Youghal",
     description: "Keep driving I'd say",
     category: "Locale",
     latitude: 51.95430,
