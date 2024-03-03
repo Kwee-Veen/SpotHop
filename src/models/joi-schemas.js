@@ -28,7 +28,14 @@ export const SpotSpec = {
   name: Joi.string().required(),
   category: Joi.string().allow("").optional(),
   description: Joi.string().allow("").optional(),
-  latitude: Joi.string().allow("").required(),
-  longitude: Joi.string().allow("").required(),
-  // TODO: location, weather(or computed?), images
+  latitude: Joi.number().min(-90).max(90).required(),
+  longitude: Joi.number().min(-180).max(180).required(),
+};
+
+export const SpotEdit = {
+  name: Joi.string().allow("").optional(),
+  category: Joi.string().allow("").optional(),
+  description: Joi.string().allow("").optional(),
+  latitude: Joi.number().min(-90).max(90).allow("").optional(),
+  longitude: Joi.number().min(-180).max(180).allow("").optional(),
 };

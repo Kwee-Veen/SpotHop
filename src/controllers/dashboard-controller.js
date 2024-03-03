@@ -28,12 +28,12 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const newSpot = {
-        userid: loggedInUser._id,
         name: request.payload.name,
         category: request.payload.category,
         description: request.payload.description,
         latitude: request.payload.latitude,
         longitude: request.payload.longitude,
+        userid: loggedInUser._id,
       };
       await db.spotStore.addSpot(newSpot);
       return h.redirect("/dashboard");
