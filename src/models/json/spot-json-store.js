@@ -92,4 +92,14 @@ export const spotJsonStore = {
     await this.addSpot(updatedSpot);
     return updatedSpot
   },
+
+  async deleteSpotsByUserid(userid) {
+    await db.read();
+    const spots = await this.getUserSpots(userid);
+    for (let i = 0; i < spots.length; i++) {
+      await this.deleteSpot(spots[i]._id)
+    } 
+    await db.write();
+    return null
+  },
 };

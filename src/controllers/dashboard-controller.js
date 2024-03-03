@@ -22,6 +22,7 @@ export const dashboardController = {
       failAction: async function (request, h, error) {
         const loggedInUser = request.auth.credentials;
         const spots = await db.spotStore.getUserSpots(loggedInUser._id);
+        console.log("Error adding spot");
         return h.view("dashboard-view", { title: "Error adding spot", spots: spots, errors: error.details }).takeover().code(400);
       },
     },
@@ -36,6 +37,7 @@ export const dashboardController = {
         userid: loggedInUser._id,
       };
       await db.spotStore.addSpot(newSpot);
+      console.log("New spot added: " + JSON.stringify(newSpot.name));
       return h.redirect("/dashboard");
     },
   },
@@ -43,6 +45,7 @@ export const dashboardController = {
   deleteSpot: {
     handler: async function (request, h) {
       const spot = await db.spotStore.getSpotById(request.params.id);
+      console.log("Spot deleted: " + JSON.stringify(spot.name));
       await db.spotStore.deleteSpot(spot._id);
       return h.redirect("/dashboard");
     },

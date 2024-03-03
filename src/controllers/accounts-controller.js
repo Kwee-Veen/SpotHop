@@ -28,6 +28,7 @@ export const accountsController = {
     handler: async function (request, h) {
       const user = request.payload;
       await db.userStore.addUser(user);
+      console.log("Signed up new user " + JSON.stringify(request.payload.email));
       return h.redirect("/login");
     },
   },
@@ -45,6 +46,7 @@ export const accountsController = {
       payload: UserCredentialsSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
+        console.log("Login failed");
         return h.view("login-view", { title: "Log in error", errors: error.details }).takeover().code(400);
       },
     },
@@ -55,6 +57,7 @@ export const accountsController = {
         return h.redirect("/");
       }
       request.cookieAuth.set({ id: user._id });
+      console.log("Login success - rendering dashboard for " + JSON.stringify(user.email))
       return h.redirect("/dashboard");
     },
   },
@@ -62,6 +65,7 @@ export const accountsController = {
   logout: {
     handler: function (request, h) {
       request.cookieAuth.clear();
+      console.log("User logged out");
       return h.redirect("/");
     },
   },
@@ -75,13 +79,22 @@ export const accountsController = {
   },
 
   accountDetailsIndex: {
-    handler: function (request, h) {
+    handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const viewData = {
+      let viewData = {
         title: "Edit Account Details",
-        user: loggedInUser,
+        userList: []
       };
       console.log('Access account details of user', loggedInUser.email);
+      if (loggedInUser.admin == true) {
+        const users = await db.userStore.getAllUsers();
+        viewData.title = "Administrator Dashboard";
+        viewData.userList = users;
+        console.log("Rendering administrator account dashboard")
+      } else {
+        viewData.userList[0] = loggedInUser;
+        console.log("Rendering account details view")
+      }
       return h.view("account-view", viewData);
     },
   },
@@ -91,22 +104,36 @@ export const accountsController = {
       payload: UserSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        console.log("Account details modification error")
+        console.log("Account details modification error");
         const loggedInUser = request.auth.credentials;
-        console.log("Logged in user: ", loggedInUser)
+        console.log("Logged in user: ", loggedInUser);
         const viewData = {
           user: loggedInUser,
           title: "Account details modification error", 
           errors: error.details,
         };
+        console.log("Error modifying account of user " + JSON.stringify(user.email));
         return h.view("account-view", viewData).takeover().code(400);
       },
     },
     handler: async function (request, h) {
-      const oldUserData = request.auth.credentials;
+      const account = request.params.id;
       const updatedUserData = request.payload;
-      await db.userStore.updateUser(oldUserData, updatedUserData);
+      await db.userStore.updateUser(account, updatedUserData);
+      console.log("Account modified: " + JSON.stringify(updatedUserData.email));
       return h.redirect("/accountDetailsIndex");
+    },
+  },
+
+  deleteUser: {
+    handler: async function (request, h) {
+      const userid = request.params.id;
+      await db.spotStore.deleteSpotsByUserid(userid);
+      await db.userStore.deleteUserById(userid);
+      console.log("Account + associated spots deleted: " + JSON.stringify(userid));
+      if (userid !== request.auth.credentials._id) {
+        return h.redirect("/accountDetailsIndex");
+      } else return h.redirect("/");
     },
   },
 };
