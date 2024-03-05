@@ -35,7 +35,6 @@ export const spotJsonStore = {
     return foundSpot;
   },
 
-  // Originally took a full spot as argument, now only takes a category
   async getSpotsByCategory(category) {
     await db.read();
     let foundSpots = db.data.spots.filter((spot) => spot.category === category);
@@ -68,15 +67,6 @@ export const spotJsonStore = {
     r = await this.getAllSpots();
     results.Global = r.length;
     return results;
-  },
-
-  async getSpotsByLocation(inputSpot) {
-    await db.read();
-    let foundSpots = db.data.spots.filter((spot) => spot.latitude === inputSpot.latitude && spot.longitude === inputSpot.longitude);
-    if (!foundSpots) {
-      foundSpots = null;
-    }
-    return foundSpots;
   },
 
   async searchSpots(userid, name, category, latitude, longitude) {

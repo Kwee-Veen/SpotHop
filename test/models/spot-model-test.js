@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js"
-import { testSpot, spotsGroup } from "../fixtures.js";
+import { testSpot, spotsGroup, maggie } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 import { EventEmitter } from "events";
 
@@ -37,8 +37,6 @@ suite("Spot Model tests", () => {
     test("get spots by category, location - success", async () => {
         let returnedSpots = await db.spotStore.getSpotsByCategory(spotsGroup[1].category);
         assert.equal(returnedSpots.length, 2);
-        returnedSpots = await db.spotStore.getSpotsByLocation(spotsGroup[0]);
-        assert.equal(returnedSpots.length, 1);
     });
 
     test("get a spot - no params", async () => {
@@ -46,8 +44,6 @@ suite("Spot Model tests", () => {
         let nullSpot = await db.spotStore.getSpotById(nullInputSpot);
         assert.isNull(nullSpot);
         nullSpot = await db.spotStore.getSpotsByCategory(nullInputSpot);
-        assert.deepEqual(nullSpot, []);
-        nullSpot = await db.spotStore.getSpotsByLocation(nullInputSpot);
         assert.deepEqual(nullSpot, []);
     });
     
@@ -63,7 +59,6 @@ suite("Spot Model tests", () => {
         await db.spotStore.deleteSpot("bad-id");
         const allSpots = await db.spotStore.getAllSpots();
         assert.equal(spotsGroup.length, allSpots.length);
-        await db.spotStore.deleteAllSpots();
     });
 
     test("edit a spot - success", async () => {
@@ -72,4 +67,40 @@ suite("Spot Model tests", () => {
         await db.spotStore.deleteAllSpots();
     });
 
+    test("search for spots - success", async () => {
+        let returnedSpots = await db.spotStore.searchSpots(null, testSpot.name, testSpot.category, testSpot.latitude, testSpot.longitude);
+        assert.deepEqual(returnedSpots, []);
+        const newSpot = await db.spotStore.addSpot(testSpot);
+        returnedSpots = await db.spotStore.searchSpots(null, testSpot.name, testSpot.category, testSpot.latitude, testSpot.longitude);
+        assertSubset(returnedSpots, testSpot);
+    });
+
+    test("search for spots - failure", async () => {
+        const returnedSpots = await db.spotStore.searchSpots("bad params", "bad params", "bad params", "bad params", "bad params");
+        assert.deepEqual(returnedSpots, []);
+        await db.spotStore.deleteAllSpots();
+    });
+
+    test("spot analytics - success", async () => {
+        let returnedSpots = await db.spotStore.getSpotAnalytics(maggie);
+        let test = {}; 
+        test.Locale = 2;
+        test.Activity = 0;
+        test.Scenery = 0;
+        test.Site = 0;
+        test.Structure = 1;
+        test.Shopping = 0;
+        test.User = 1;
+        test.Global = 3;
+        assert.deepEqual(returnedSpots, test);
+        await db.spotStore.addSpot(testSpot);
+        await db.spotStore.deleteAllSpots();
+        returnedSpots = await db.spotStore.getSpotAnalytics(maggie);
+        test.Locale = 0;
+        test.Structure = 0;
+        test.User = 0;
+        test.Global = 0;
+        assert.deepEqual(returnedSpots, test);
+        await db.spotStore.deleteAllSpots();
+    });
 });
