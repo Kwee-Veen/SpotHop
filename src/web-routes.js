@@ -15,6 +15,7 @@ export const webRoutes = [
 
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addspot", config: dashboardController.addSpot },
+  { method: "POST", path: "/dashboard/searchspot", config: dashboardController.searchSpot },
   { method: "GET", path: "/dashboard/{id}/deletespot", config: dashboardController.deleteSpot },
 
   { method: "GET", path: "/spot/{id}", config: spotController.index },
@@ -23,6 +24,7 @@ export const webRoutes = [
   { method: "GET", path: "/accountDetailsIndex", config: accountsController.accountDetailsIndex },
   { method: "POST", path: "/modifyaccount/{id}", config: accountsController.modifyAccount },
   { method: "POST", path: "/deleteaccount/{id}", config: accountsController.deleteUser },
+
 
   // FIXME: create catch-all route, e.g.
   // { method: "GET", path: "*", config: accountsController.index },

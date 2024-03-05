@@ -35,7 +35,7 @@ suite("Spot Model tests", () => {
     });
 
     test("get spots by category, location - success", async () => {
-        let returnedSpots = await db.spotStore.getSpotsByCategory(spotsGroup[1]);
+        let returnedSpots = await db.spotStore.getSpotsByCategory(spotsGroup[1].category);
         assert.equal(returnedSpots.length, 2);
         returnedSpots = await db.spotStore.getSpotsByLocation(spotsGroup[0]);
         assert.equal(returnedSpots.length, 1);

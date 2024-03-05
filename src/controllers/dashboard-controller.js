@@ -6,11 +6,38 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const spots = await db.spotStore.getUserSpots(loggedInUser._id);
+      const analytics = await db.spotStore.getSpotAnalytics(loggedInUser);
       const viewData = {
         title: "SpotHop Dashboard",
         user: loggedInUser,
         spots: spots,
+        analytics: analytics,
       };
+      console.log("Rendering dashboard view");
+      return h.view("dashboard-view", viewData);
+    },
+  },
+
+  searchSpot: {
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const name = request.payload.name;
+      const category = request.payload.category;
+      const latitude = request.payload.latitude;
+      const longitude = request.payload.longitude;
+      let userid = null; 
+      if (request.payload.global === "false") {
+        userid = loggedInUser._id;
+      }
+      const spots = await db.spotStore.searchSpots(userid, name, category, latitude, longitude);
+      const analytics = await db.spotStore.getSpotAnalytics(loggedInUser);
+      const viewData = {
+        title: "Search Results",
+        user: loggedInUser,
+        spots: spots,
+        analytics: analytics,
+      };
+      console.log("Executing search");
       return h.view("dashboard-view", viewData);
     },
   },

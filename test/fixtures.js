@@ -31,7 +31,7 @@ export const testUsers = [
 export const testSpot = {
   name: "Jogutenmangu",
   description: "Japanese Shinto shrine to the god Tenjin, incidently right next to where I lived in Japan",
-  category: "ReligiousSite",
+  category: "Site",
   latitude: 34.85823,
   longitude: 135.61770,
 };
