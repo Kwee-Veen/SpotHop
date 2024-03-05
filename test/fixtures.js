@@ -5,6 +5,7 @@ export const maggie = {
   lastName: "Simpson",
   email: "maggie@simpson.com",
   password: "secret",
+  _id: 1234,
 };
 
 export const testUsers = [
@@ -13,27 +14,31 @@ export const testUsers = [
     lastName: "Simpson",
     email: "homer@simpson.com",
     password: "secret",
+    _id: 2345,
   },
   {
     firstName: "Marge",
     lastName: "Simpson",
     email: "marge@simpson.com",
     password: "secret",
+    _id: 3456,
   },
   {
     firstName: "Bart",
     lastName: "Simpson",
     email: "bart@simpson.com",
     password: "secret",
+    _id: 4567,
   },
 ];
 
 export const testSpot = {
   name: "Jogutenmangu",
   description: "Japanese Shinto shrine to the god Tenjin, incidently right next to where I lived in Japan",
-  category: "ReligiousSite",
+  category: "Site",
   latitude: 34.85823,
   longitude: 135.61770,
+  userid: 2345,
 };
 
 export const spotsGroup = [
@@ -43,6 +48,7 @@ export const spotsGroup = [
     category: "Structure",
     latitude: 34.62029,
     longitude: 135.02227,
+    userid: 1234,
   },
   {
     name: "Whistler",
@@ -50,6 +56,7 @@ export const spotsGroup = [
     category: "Locale",
     latitude: 50.11615,
     longitude: -122.95349,
+    userid: 3456,
   },
   {
     name: "Youghal",
@@ -57,5 +64,6 @@ export const spotsGroup = [
     category: "Locale",
     latitude: 51.95430,
     longitude: -7.84697,
+    userid: 4567,
   },
 ];

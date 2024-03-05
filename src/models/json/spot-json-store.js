@@ -35,20 +35,61 @@ export const spotJsonStore = {
     return foundSpot;
   },
 
-  async getSpotsByCategory(inputSpot) {
+  async getSpotsByCategory(category) {
     await db.read();
-    let foundSpots = db.data.spots.filter((spot) => spot.category === inputSpot.category);
+    let foundSpots = db.data.spots.filter((spot) => spot.category === category);
     if (!foundSpots) {
       foundSpots = null;
     }
     return foundSpots;
   },
 
-  async getSpotsByLocation(inputSpot) {
+  async getSpotAnalytics(user) {
     await db.read();
-    let foundSpots = db.data.spots.filter((spot) => spot.latitude === inputSpot.latitude && spot.longitude === inputSpot.longitude);
-    if (!foundSpots) {
-      foundSpots = null;
+    let results = {}; 
+    results.Locale = 0;
+    results.Activity = 0;
+    results.Scenery = 0;
+    results.Site = 0;
+    results.Structure = 0;
+    results.Shopping = 0;
+    results.User = 0;
+    results.Global = 0;
+    let r = null;
+    const categories = ['Locale', 'Activity', 'Scenery', 'Site', 'Structure', 'Shopping'];
+    for (let i = 0; i < categories.length; i++) {
+      let category = categories[i];
+      r = await this.getSpotsByCategory(category);
+      results[category] = r.length;
+    }
+    r = await this.getUserSpots(user._id);
+    results.User = r.length;
+    r = await this.getAllSpots();
+    results.Global = r.length;
+    return results;
+  },
+
+  async searchSpots(userid, name, category, latitude, longitude) {
+    await db.read();
+    let foundSpots = null;
+    if (userid) {
+      foundSpots = await this.getUserSpots(userid);
+    } else {
+      foundSpots = await this.getAllSpots();
+    }
+    if (foundSpots === null) {
+      console.log("No spots found");
+      return foundSpots;
+    }
+    if (name) {
+      foundSpots = foundSpots.filter((spot) => spot.name === name);
+    }
+    if (latitude, longitude) {
+      foundSpots = foundSpots.filter((spot) => spot.latitude === Number(latitude));
+      foundSpots = foundSpots.filter((spot) => spot.longitude === Number(longitude));
+    }
+    if (category) {
+      foundSpots = foundSpots.filter((spot) => spot.category === category);
     }
     return foundSpots;
   },
@@ -83,13 +124,20 @@ export const spotJsonStore = {
     if (!updatedSpot.longitude) {
       updatedSpot.longitude  = originalSpot.longitude;
     }
-    console.log("Original ID: " + JSON.stringify(originalSpot._id));
-    console.log("Updated ID (shouldn't be defined yet): " + JSON.stringify(updatedSpot._id));
     updatedSpot.userid = originalSpot.userid,
     updatedSpot._id = originalSpot._id,
-    console.log("Updated ID: " + JSON.stringify(updatedSpot._id));
     await this.deleteSpot(originalSpot._id);
     await this.addSpot(updatedSpot);
     return updatedSpot
+  },
+
+  async deleteSpotsByUserid(userid) {
+    await db.read();
+    const spots = await this.getUserSpots(userid);
+    for (let i = 0; i < spots.length; i++) {
+      await this.deleteSpot(spots[i]._id)
+    } 
+    await db.write();
+    return null
   },
 };
