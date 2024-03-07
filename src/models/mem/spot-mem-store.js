@@ -21,7 +21,6 @@ export const spotMemStore = {
     return foundSpot;
   },
 
-  // changed from getPlaylistTracks; now using userid instead of playlistid
   async getUserSpots(userid) {
     let foundSpots = spots.filter((spot) => spot.userid === userid);
     if (!foundSpots) {
@@ -38,10 +37,4 @@ export const spotMemStore = {
   async deleteAllSpots() {
     spots = [];
   },
-
-//   async updateSpot(spot, updatedSpot) {
-//     spot.title = updatedSpot.title;
-//     spot.artist = updatedSpot.artist;
-//     spot.duration = updatedSpot.duration;
-//   },
 };

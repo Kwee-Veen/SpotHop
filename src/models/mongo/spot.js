@@ -1,1 +1,15 @@
-// TODO: Create based on track.js & playlist.js
+import Mongoose from "mongoose";
+
+const { Schema } = Mongoose;
+
+const spotSchema = new Schema({
+    name: String,
+    description: String,
+    category: String,
+    latitude: Number,
+    longitude: Number,
+    _id: String,
+    userid: String,
+});
+
+export const Spot = Mongoose.model("Spot", spotSchema);
