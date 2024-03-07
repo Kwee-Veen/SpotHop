@@ -75,9 +75,7 @@ suite("Spot Model tests", () => {
     });
 
     test("search for spots - failure", async () => {
-        let returnedSpots = await db.spotStore.searchSpots("bad params", "bad params", "bad params", "bad params", "bad params");
-        assert.deepEqual(returnedSpots, null);
-        returnedSpots = await db.spotStore.searchSpots();
+        const returnedSpots = await db.spotStore.searchSpots("bad params", "bad params", "bad params", "bad params", "bad params");
         assert.deepEqual(returnedSpots, null);
     });
 

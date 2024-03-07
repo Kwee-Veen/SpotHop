@@ -24,4 +24,29 @@ export const spothopService = {
     const res = await axios.delete(`${this.spothopUrl}/api/users`);
     return res.data;
   },
+
+  async createSpot(spot) {
+    const res = await axios.post(`${this.spothopUrl}/api/spots`, spot);
+    return res.data;
+  },
+
+  async deleteAllSpots() {
+    const response = await axios.delete(`${this.spothopUrl}/api/spots`);
+    return response.data;
+  },
+
+  async deleteSpot(id) {
+    const response = await axios.delete(`${this.spothopUrl}/api/spots/${id}`);
+    return response;
+  },
+
+  async getAllSpots() {
+    const res = await axios.get(`${this.spothopUrl}/api/spots`);
+    return res.data;
+  },
+
+  async getSpot(id) {
+    const res = await axios.get(`${this.spothopUrl}/api/spots/${id}`);
+    return res.data;
+  },
 }
