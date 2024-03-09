@@ -5,7 +5,6 @@ export const maggie = {
   lastName: "Simpson",
   email: "maggie@simpson.com",
   password: "secret",
-  _id: "41224d776a326fb40f000004",
 };
 
 export const testUsers = [
@@ -14,21 +13,18 @@ export const testUsers = [
     lastName: "Simpson",
     email: "homer@simpson.com",
     password: "secret",
-    _id: "41224d776a326fb40f000001",
   },
   {
     firstName: "Marge",
     lastName: "Simpson",
     email: "marge@simpson.com",
     password: "secret",
-    _id: "41224d776a326fb40f000002",
   },
   {
     firstName: "Bart",
     lastName: "Simpson",
     email: "bart@simpson.com",
     password: "secret",
-    _id: "41224d776a326fb40f000003",
   },
 ];
 
@@ -64,3 +60,13 @@ export const spotsGroup = [
     longitude: -7.84697,
   },
 ];
+
+export const maggieCredentials = {
+  email: "maggie@simpson.com",
+  password: "secret"
+};
+
+export const homerCredentials = {
+  email: "homer@simpson.com",
+  password: "secret"
+};

@@ -1,22 +1,25 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js"
-import { testSpot, spotsGroup, maggie, testUsers } from "../fixtures.js";
+import { testSpot, spotsGroup, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 import { EventEmitter } from "events";
 
 suite("Spot Model tests", () => {
-
     setup(async () => {
         EventEmitter.setMaxListeners(25);
         db.init("mongo");
         await db.spotStore.deleteAllSpots();
+        await db.userStore.deleteAll();
+        for (let i = 0; i < testUsers.length; i += 1) {
+            testUsers[i] = await db.userStore.addUser(testUsers[i]);
+        }
         for (let i = 0; i < spotsGroup.length; i += 1) {
             spotsGroup[i] = await db.spotStore.addSpot(spotsGroup[i], testUsers[i]._id);
         }
     });
 
     test("create a spot", async () => {
-        const newSpot = await db.spotStore.addSpot(testSpot, maggie._id);
+        const newSpot = await db.spotStore.addSpot(testSpot, testUsers[0]._id);
         assertSubset(newSpot, testSpot);
     });
 
@@ -29,7 +32,7 @@ suite("Spot Model tests", () => {
     });
 
     test("get a spot - success", async () => {
-        const inputSpot = await db.spotStore.addSpot(testSpot, maggie._id);
+        const inputSpot = await db.spotStore.addSpot(testSpot, testUsers[0]._id);
         const returnedSpot1 = await db.spotStore.getSpotById(inputSpot._id);
         assert.deepEqual(inputSpot, returnedSpot1);
     });
@@ -69,7 +72,7 @@ suite("Spot Model tests", () => {
     test("search for spots - success", async () => {
         let returnedSpots = await db.spotStore.searchSpots(null, testSpot.name, testSpot.category, testSpot.latitude, testSpot.longitude);
         assert.deepEqual(returnedSpots, null);
-        await db.spotStore.addSpot(testSpot, maggie._id);
+        await db.spotStore.addSpot(testSpot, testUsers[0]._id);
         returnedSpots = await db.spotStore.searchSpots(null, testSpot.name, testSpot.category, testSpot.latitude, testSpot.longitude);
         assertSubset(returnedSpots, testSpot);
     });
@@ -91,9 +94,6 @@ suite("Spot Model tests", () => {
         test.Uncategorised = 0;
         test.User = 1;
         test.Global = 3;
-        assert.deepEqual(returnedSpots, test);
-        returnedSpots = await db.spotStore.getSpotAnalytics(maggie);
-        test.User = 0;
         assert.deepEqual(returnedSpots, test);
         await db.spotStore.deleteAllSpots();
         returnedSpots = await db.spotStore.getSpotAnalytics(testUsers[0]);

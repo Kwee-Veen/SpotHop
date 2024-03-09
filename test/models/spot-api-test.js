@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 import { assert } from "chai";
-import { testSpot, spotsGroup, maggie } from "../fixtures.js";
+import { testSpot, spotsGroup, maggie, maggieCredentials } from "../fixtures.js";
 import { spothopService } from "./spothop-service.js";
 import { assertSubset } from "../test-utils.js";
 
@@ -11,9 +11,13 @@ suite("Spot API tests", () => {
   let user = null;
 
   setup(async () => {
+    spothopService.clearAuth();
+    user = await spothopService.createUser(maggie);
+    await spothopService.authenticate(maggieCredentials);
     await spothopService.deleteAllSpots();
     await spothopService.deleteAllUsers();
     user = await spothopService.createUser(maggie);
+    await spothopService.authenticate(maggieCredentials);
     testSpot.userid = user._id;
   });
 

@@ -1,14 +1,20 @@
 import { assert } from "chai";
 import { spothopService } from "./spothop-service.js";
 import { assertSubset } from "../test-utils.js";
-import { maggie, testUsers } from "../fixtures.js";
+import { maggie, testUsers, homerCredentials } from "../fixtures.js";
+
+const users = new Array(testUsers.length);
 
 suite("User API tests", () => {
   setup(async () => {
+    spothopService.clearAuth();
+    await spothopService.createUser(testUsers[0]);
+    await spothopService.authenticate(homerCredentials);
     await spothopService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
-      testUsers[i] = await spothopService.createUser(testUsers[i]);
+      users[i] = await spothopService.createUser(testUsers[i]);
     }
+    await spothopService.authenticate(homerCredentials);
   });
   teardown(async () => {
   });
@@ -24,13 +30,15 @@ suite("User API tests", () => {
     let returnedUsers = await spothopService.getAllUsers();
     assert.equal(returnedUsers.length, 3);
     await spothopService.deleteAllUsers();
+    await spothopService.createUser(testUsers[0]);
+    await spothopService.authenticate(homerCredentials);
     returnedUsers = await spothopService.getAllUsers();
-    assert.equal(returnedUsers.length, 0);
+    assert.equal(returnedUsers.length, 1);
   });
 
   test("get a user - success", async () => {
-    const returnedUser = await spothopService.getUser(testUsers[0]._id);
-    assert.deepEqual(testUsers[0], returnedUser);
+    const returnedUser = await spothopService.getUser(users[0]._id);
+    assert.deepEqual(users[0], returnedUser);
   });
 
   test("get a user - fail", async () => {
@@ -45,8 +53,10 @@ suite("User API tests", () => {
 
   test("get a user - deleted user", async () => {
     await spothopService.deleteAllUsers();
+    await spothopService.createUser(testUsers[0]);
+    await spothopService.authenticate(homerCredentials);
     try {
-      const returnedUser = await spothopService.getUser(testUsers[0]._id);
+      await spothopService.getUser(testUsers[0]._id);
       assert.fail("Should not return a response");
     } catch (error) {
       assert(error.response.data.message === "No User with this id");
