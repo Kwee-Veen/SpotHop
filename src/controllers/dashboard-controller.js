@@ -61,7 +61,7 @@ export const dashboardController = {
         description: request.payload.description,
         latitude: request.payload.latitude,
         longitude: request.payload.longitude,
-        // userid: loggedInUser._id,
+        userid: loggedInUser._id,
       };
       await db.spotStore.addSpot(newSpot, loggedInUser._id);
       console.log("New spot added: " + JSON.stringify(newSpot.name));

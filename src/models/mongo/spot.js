@@ -8,6 +8,10 @@ const spotSchema = new Schema({
     category: String,
     latitude: Number,
     longitude: Number,
+    userid: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
 });
 
 export const Spot = Mongoose.model("Spot", spotSchema);

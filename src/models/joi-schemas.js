@@ -12,13 +12,13 @@ export const UserCredentialsSpec = Joi.object()
 export const UserSpec =  UserCredentialsSpec.keys({
   firstName: Joi.string().example("Big").required(),
   lastName: Joi.string().example("Boss").required(),
+  _id: IdSpec,
 })
 .label("UserSpec");
 
 
 export const UserSpecPlus = UserSpec.keys({
   admin: Joi.boolean().example("true"),
-  _id: IdSpec,
   __v: Joi.number(),
 })
 .label("UserSpecPlus");

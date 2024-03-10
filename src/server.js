@@ -21,7 +21,7 @@ const __dirname = path.dirname(__filename);
 const result = dotenv.config();
 if (result.error) {
   console.log(result.error.message);
-  process.exit(1);
+  // process.exit(1);
 }
 
 const swaggerOptions = {
@@ -42,8 +42,10 @@ const swaggerOptions = {
 
 async function init() {
   const server = Hapi.server({
-    port: 3000,
-    host: "localhost",
+    // port: 3000,
+    // host: "localhost",
+    port: process.env.port || 3000,
+    host: "0.0.0.0",
   });
   await server.register(Vision);
   await server.register(Cookie);
