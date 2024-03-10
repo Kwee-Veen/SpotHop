@@ -10,9 +10,6 @@ export const spotMongoStore = {
     async addSpot(spot, userid) {
         if (spot) {
             try {
-                if (!spot._id) {
-                    spot._id = v4();
-                }
                 if (!spot.userid) {
                     spot.userid = userid;
                 }
