@@ -173,9 +173,10 @@ export const spotMongoStore = {
                 if (!updatedSpot.longitude) {
                     updatedSpot.longitude = originalSpot.longitude;
                 }
+                updatedSpot.img = originalSpot.img,
                 updatedSpot.userid = originalSpot.userid,
-                    updatedSpot._id = originalSpot._id,
-                    await this.deleteSpot(originalSpot._id);
+                updatedSpot._id = originalSpot._id,
+                await this.deleteSpot(originalSpot._id);
                 await this.addSpot(updatedSpot);
                 return updatedSpot
             } catch (error) {
@@ -203,4 +204,10 @@ export const spotMongoStore = {
         console.log("Error deleting user spots: no userid provided");
         return null;
     },
+
+    async updateSpot(updatedSpot) {
+        const spot = await Spot.findOne({ _id: updatedSpot._id });
+        spot.img = updatedSpot.img;
+        await spot.save();
+      },
 };

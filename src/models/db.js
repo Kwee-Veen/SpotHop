@@ -1,5 +1,3 @@
-// import { userMemStore } from "./mem/user-mem-store.js";
-// import { spotMemStore } from "./mem/spot-mem-store.js";
 import { userJsonStore } from "./json/user-json-store.js";
 import { spotJsonStore } from "./json/spot-json-store.js";
 import { connectMongo } from "./mongo/connect.js";

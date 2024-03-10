@@ -9,7 +9,6 @@ export const userMongoStore = {
 
   async addUser(user) {
     try {
-      // if (!user._id) user._id = v4();
       let newUser = new User(user);
       const userList = await this.getAllUsers();
       if (userList.length <= 0) {
