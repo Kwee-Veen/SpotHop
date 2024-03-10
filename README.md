@@ -1,5 +1,7 @@
 <h1>SpotHop</h1>
 
+![Readme_Image](https://github.com/Kwee-Veen/SpotHop/assets/118535981/ccf48c53-b5fc-4ff7-88d0-b55c095e4efa)
+
 SpotHop is a placemark-focused application, allowing creation and management of user-generated 'Spots'. <br>
 Users can sign up and log in, create and manage their own spots, and view those of other users. <br>
 Spots can include a name and description, a category, and lat/long coordinates. <br>
