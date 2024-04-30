@@ -28,7 +28,7 @@ export const userMongoStore = {
     if (id) {
       try {
         let user = await User.findOne({ _id: id }).lean();
-        if (user === undefined) u = null;
+        if (user === undefined) user = null;
         return user;
       } catch (error) {
         console.log("Error getting user by id: bad params");
