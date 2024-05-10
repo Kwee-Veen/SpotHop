@@ -19,9 +19,7 @@
   // // as will need to see the userList in that (if the current user is an admin, else only see current user)
   // export let userList: User[] = [];
 
-
   async function create() {
-    console.log(`Created Spot "${name}" in category "${selectedCategory}" at co-ordinates "${latitude}, ${longitude}" with description "${description}"`);
     if (name) {
       let spot = {
         name: name,
@@ -34,7 +32,6 @@
       const success = await spotService.createSpot(spot, get(currentSession));
       if (!success) {
         message = "Spot not created - some error occurred";
-        console.log(message);
         return;
       }
     } else {

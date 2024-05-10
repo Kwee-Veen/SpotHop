@@ -1,8 +1,10 @@
 <script lang="ts">
-    import { goto } from "$app/navigation";
     import UserCredentials from "$lib/ui/UserCredentials.svelte";
     import UserDetails from "$lib/ui/UserDetails.svelte";
     import Message from "$lib/ui/Message.svelte";
+    import { spotService } from "$lib/services/spot-service";
+    import type { User } from "$lib/types/spot-types";
+    import { goto } from "$app/navigation";
   
     let firstName = "";
     let lastName = "";
@@ -11,11 +13,21 @@
     let message = "";
   
     async function signup() {
-      const success = false;
-      if (success) {
-        goto("/donate");
-      } else {
-        message = "Error Trying to sign up";
+      let user: User = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        admin: false,
+      };
+      const success = await spotService.signup(user);
+      if (!success) {
+        message = "New user not created - some error occurred";
+        return;
+      }
+      else {
+        goto('/login');
+        return;
       }
     }
   </script>

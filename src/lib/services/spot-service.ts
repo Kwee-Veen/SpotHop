@@ -4,12 +4,11 @@ import type { Session, User, Spot } from "$lib/types/spot-types";
 export const spotService = {
   baseUrl: "http://Serenity:4000",
 
-  async signup(user: User): Promise<boolean> {
+  async signup(user: User) {
     try {
-      const response = await axios.post(`${this.baseUrl}/api/users`, user);
-      return response.data.success === true;
+      const response = await axios.post(this.baseUrl + "/api/users", user);
+      return true;
     } catch (error) {
-      console.log(error);
       return false;
     }
   },
