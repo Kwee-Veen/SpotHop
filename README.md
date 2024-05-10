@@ -1,38 +1,46 @@
-# create-svelte
+<h1>SpotHop</h1>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+![Readme_Image](https://github.com/Kwee-Veen/SpotHop/assets/118535981/ccf48c53-b5fc-4ff7-88d0-b55c095e4efa)
 
-## Creating a project
+SpotHop is a placemark-focused application, allowing creation and management of user-generated 'Spots'. <br>
+Users can sign up and log in, create and manage their own spots, and view those of other users. <br>
+Spots can include a name and description, a category, and lat/long coordinates. <br>
+Images can also be uploaded for spots, which are cloud-hosted (Cloudinary). 
 
-If you're seeing this, you've probably already done this step. Congrats!
+Analytics are generated for all saved spots, including a breakdown by spot category and user vs. global spots. <br>
+Searches can be performed to only display spots meeting specific criteria, including name, category, coordinates and user-generated. <br>
+User accounts can be deleted; the first user to be created is also designated as the admin, and can view, modify and delete all user accounts.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+<hr>
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+SpotHop is hosted by both Render:<br>
+    _https://spothop.onrender.com/_ <br>
+and Glitch:<br>
+    _https://spothop.glitch.me/_ <br>
 
-## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Spothop is also a REST API; users and spots can be created, found and deleted through HTTP requests.<br>
+The API is supported by Swagger 2.0 documentation, with descriptions of all API functions and secure testing facilitated.<br>
+Spothop is secured using cookie authentication (web app) and JSON Web Token JWT authentication (API).
 
-```bash
-npm run dev
+<hr>
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Test-driven development was employed in building SpotHop, and a full suite of tests for both the web app and API are provided.
 
-## Building
+SpotHop's default persistence route is MongoDB, cloud-hosted (Cloud Atlas), 
+JSON persistence can be employed by tweaking the src/server.js file from:<br>  
+  **db.init("mongo");** <br>
+to:<br>
+    **db.init();** <br>
+    
+<hr>
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+The following environmental variables must be specified in order to reproduce this web app: <br>
+    _COOKIE_NAME (String)_ <br>
+    _COOKIE_PASSWORD (String)_ <br>
+    _db (String - Cloud Atlas MongoDB server connection string)_ <br>
+    _cloudinary_name (String - Cloudinary credentials)_ <br>
+    _cloudinary_key (String - Cloudinary credentials)_ <br>
+    _cloudinary_secret (String - Cloudinary credentials)_ <br>
+    
+<hr>
