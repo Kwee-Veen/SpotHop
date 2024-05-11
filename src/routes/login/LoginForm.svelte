@@ -14,6 +14,7 @@
     let session = await spotService.login(email, password);
     if (session) {
       currentSession.set(session);
+      localStorage.spot = JSON.stringify(session);
       goto("/create");
     } else {
       email = "";

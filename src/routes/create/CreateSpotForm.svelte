@@ -4,7 +4,7 @@
   import type { User, Spot } from "$lib/types/spot-types";
   import { spotService } from "$lib/services/spot-service";
   import { get } from "svelte/store";
-  import { currentSession } from "$lib/stores";
+  import { currentSession, latestSpot } from "$lib/stores";
 
   // export let spots: Spot[] = [];
 
@@ -33,6 +33,10 @@
       if (!success) {
         message = "Spot not created - some error occurred";
         return;
+      }
+      else {
+        latestSpot.set(spot);
+        return
       }
     } else {
       message = "Please specify your new spot's details";

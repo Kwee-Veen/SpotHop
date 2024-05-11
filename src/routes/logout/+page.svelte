@@ -3,7 +3,7 @@
     import { currentSession } from "$lib/stores";
   
     currentSession.set({ name: "", _id: "", token: "" });
-  
+    localStorage.removeItem("spot");
     goto("/");
   </script>
   
