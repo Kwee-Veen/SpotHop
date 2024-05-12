@@ -10,25 +10,27 @@
   {#each spots as spot}
   <div class="box has-background-success-light">
     <div class="columns is-centered">
-      <div class="column is-9">
+      <div class="column is-6">
         <div class="box">
           <table>
             <tr>
               <th>Name</th>
-              <th>Category</th>
-              <th>Coordinates</th>
+              <th>&nbsp; Category &nbsp;</th>
+              <th>&nbsp; Coordinates</th>
             </tr>
             <tr>
               <td>
                 {spot.name}
               </td>
               <td>
-                {spot.category}
+                &nbsp; {spot.category} &nbsp;
               </td>
               <td>
-                {spot.latitude}, {spot.longitude}
+                &nbsp; {spot.latitude}, {spot.longitude}
               </td>
             </tr>
+            </table>
+            <table>
             <tr>
               <td>
                 <b>Description:</b> {spot.description}
@@ -85,6 +87,16 @@
             <SpotImage {spot}/>
         </div>
       {/if} -->
+      
+      </div>
+      <!-- <div class="column is-3">
+      </div> -->
+      <div class="column is-3">
+        {#if spot.img}
+        <div class="box">
+          <img src="{spot.img}" class="image" alt="uploaded spot">
+        </div>
+        {/if}
       </div>
       <div class="column is-3">
         {#if spot.img}

@@ -5,10 +5,10 @@
   import { onMount } from 'svelte';
   import { Chart, type EChartsOptions } from 'svelte-echarts';
   import { get } from 'svelte/store';
+
   let spotList: Spot[] = [];
   let options: EChartsOptions = {};
-
-  export let dataInput: any = [
+  let dataInput: any = [
     { value: 0, name: 'Site' },
     { value: 0, name: 'Locale' },
     { value: 0, name: 'Activity' },

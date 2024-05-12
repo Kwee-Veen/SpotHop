@@ -1,52 +1,73 @@
 <script lang='ts'>
+  import { spotService } from '$lib/services/spot-service';
+  import { currentSession } from '$lib/stores';
+  import type { User } from '$lib/types/spot-types';
+  import { onMount } from 'svelte';
   import { Chart, type EChartsOptions } from 'svelte-echarts';
+  import { get } from 'svelte/store';
 
-  // See routers/create/+page.svelte for userList generation. 
-  // Maybe set this list into a store of User[]? Then extract the first + surname from each here
+  let userList: any[] = [];
+  let displayonlyspotcount: Number[] = [];
+  let userSpotCount: any[] = []
+  let options: EChartsOptions = {};
+
+  onMount(async () => {
+    const userSpots = await spotService.getUserSpotCount(get(currentSession)) as any[];
+    userSpotCount = userSpots;
+    displayonlyspotcount = userSpots;
+    
+    const users = await spotService.getUsers(get(currentSession));
+    users.forEach((user: User) => {
+          if (user.firstName && user.lastName) {
+            let s = `${user.firstName} ${user.lastName}`
+            userList.push(s);
+          }
+        });
+    start();
+  });
+
+function start () {
   
-  // export let userList: any[] = [];
+  let setOptions: EChartsOptions = {
 
-  
-  const options: EChartsOptions = {
-
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-      }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      top: '2%',
-      containLabel: true
-    },
-    xAxis: [
-      {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        // data: userList
-        axisTick: {
-          alignWithLabel: true
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
         }
-      }
-    ],
-    yAxis: [
-      {
-        type: 'value'
-      }
-    ],
-    series: [
-      {
-        name: 'Direct',
-        type: 'bar',
-        barWidth: '60%',
-        data: [10, 52, 200, 334, 390, 330, 220]
-      }
-    ]
-
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        top: '2%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: userList,
+          axisTick: {
+            alignWithLabel: true
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name: 'Direct',
+          type: 'bar',
+          barWidth: '60%',
+          data: userSpotCount,
+        }
+      ]
     }
+    options = setOptions;
+  }
   </script>
 
   <div class="app">

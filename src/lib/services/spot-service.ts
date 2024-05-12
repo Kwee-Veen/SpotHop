@@ -71,4 +71,14 @@ export const spotService = {
       return [];
     }
   },
+
+  async getUserSpotCount(session: Session): Promise<Number[]> {
+    try {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + session.token;
+      const response = await axios.get(this.baseUrl + "/api/users/spotCount/");
+      return response.data;
+    } catch (error) {
+      return [];
+    }
+  },
 };

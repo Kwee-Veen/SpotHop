@@ -1,7 +1,7 @@
 <script lang="ts">
   import Category from "$lib/ui/Category.svelte";
   import Coordinates from "$lib/ui/Coordinates.svelte";
-  import type { User, Spot } from "$lib/types/spot-types";
+  // import type { User, Spot } from "$lib/types/spot-types";
   import { spotService } from "$lib/services/spot-service";
   import { get } from "svelte/store";
   import { currentSession, latestSpot } from "$lib/stores";
@@ -36,6 +36,7 @@
       }
       else {
         latestSpot.set(spot);
+        message = "Spot created! Scroll to the bottom of the page to see it";
         return
       }
     } else {
@@ -51,26 +52,24 @@
         <input bind:value={name} class="input is-success" placeholder="Spot name" type="text" name="name" required/>
       </div>
       <Category bind:selectedCategory />
-        <div class="field is-narrow"></div>
+      <div class="field is-narrow"></div>
       <Coordinates bind:latitude bind:longitude />
+      <div class="field">
+        <input bind:value={description} class="input is-success" type="text" placeholder="Enter description" name="description"/>
+      </div>
     </div>
-  </div>
-  <div class="field">
-    <input bind:value={description} class="input is-success" type="text" placeholder="Enter description" name="description"/>
-  </div>
+  </div>  
   <div class="text has-text-centered">
-    <button class="button is-danger is-rounded">Create Spot</button>
+    <button class="button is-link is-rounded has-text-weight-bold is-size-5">Create Spot</button>
   </div>
-  <div class="columns is-mobile has-background-info-light">
-    <div class= "column is-one-quarter"></div>
-    <div class= "column is-half">
+  <div class="columns is-mobile is-centered">
+    <div class= "column is-narrow  has-background-info-light ">
       <div class="box mt-4 has-background-warning-light">
-        <div class="content has-text-centered">
+        <div class="content has-text-centered is-italic">
           {message}
         </div>
       </div>
     </div>
-    <div class= "column is-one-quarter"></div>
   </div>
 </form>
 
