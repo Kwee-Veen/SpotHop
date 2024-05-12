@@ -13,7 +13,7 @@
   let latitude = 0;
   let longitude = 0;
   let description = "";
-  let message = "Create Spot";
+  let message = "Type in your new Spot's details above before hitting the red button";
 
   // // This may be unnecessary here; make a new folder for accounts, put this in there instead,
   // // as will need to see the userList in that (if the current user is an admin, else only see current user)
@@ -59,12 +59,18 @@
     <input bind:value={description} class="input is-success" type="text" placeholder="Enter description" name="description"/>
   </div>
   <div class="text has-text-centered">
-    <button class="button is-warning is-rounded">Create Spot</button>
+    <button class="button is-danger is-rounded">Create Spot</button>
   </div>
-  <div class="box mt-4">
-    <div class="content has-text-centered">
-      {message}
+  <div class="columns is-mobile has-background-info-light">
+    <div class= "column is-one-quarter"></div>
+    <div class= "column is-half">
+      <div class="box mt-4 has-background-warning-light">
+        <div class="content has-text-centered">
+          {message}
+        </div>
+      </div>
     </div>
+    <div class= "column is-one-quarter"></div>
   </div>
 </form>
 

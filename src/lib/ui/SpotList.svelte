@@ -1,15 +1,12 @@
 <script lang="ts">
 
   import type { Spot } from "$lib/types/spot-types";
-  // import SpotImage from "./SpotImage.svelte";
 
-  // This may be unnecessary here, but will need a userList for the account admin later. Migrate this functionality in once created.
   export let spots: Spot[] = [];
-
+  
 </script>
 
 <section class="content box">
-  <h1 class="text has-text-centered has-text-success-light">Spots</h1>
   {#each spots as spot}
   <div class="box has-background-success-light">
     <div class="columns is-centered">
@@ -100,3 +97,4 @@
   </div>
   {/each}
 </section>
+

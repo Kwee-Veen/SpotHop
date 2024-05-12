@@ -1,9 +1,28 @@
 <script lang="ts">
   import Card from "$lib/ui/Card.svelte";
-  import { subTitle } from "$lib/stores";
+  import { currentSession, latestSpot, subTitle } from "$lib/stores";
   import CreateSpotForm from "./CreateSpotForm.svelte";
+  import SpotList from "$lib/ui/SpotList.svelte";
+
+  import type { Spot } from "$lib/types/spot-types";
+  import { onMount } from "svelte";
+  import { spotService } from "$lib/services/spot-service";
+  import { get } from "svelte/store";
+  let spots: Spot[] = [];
 
   subTitle.set("Create a Spot");
+
+  latestSpot.subscribe(async (spot) => {
+    if (spot) {
+      spots.push(spot);
+      spots = [...spots];
+    }
+  });
+
+  onMount(async () => {
+    spots = await spotService.getSpots(get(currentSession));
+  });
+
 
   // // This may be unnecessary here; make a new folder for accounts, put this in there instead,
   // // as will need to see the userList in that (if the current user is an admin, else only see current user) 
@@ -21,11 +40,13 @@
 
   //   // ... end of above comment
 
-  </script>
+</script>
 
 
-<Card title="Create a Spot">
-  <!-- below's userList is also unnecessary here, but would be in account admin. -->
-  <!-- <CreateSpotForm {userList} /> -->
+<Card>
   <CreateSpotForm />
+</Card>
+
+<Card>
+  <SpotList {spots}/>
 </Card>

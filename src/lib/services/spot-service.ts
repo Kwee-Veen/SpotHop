@@ -62,4 +62,13 @@ export const spotService = {
     }
   },
 
+  async getAnalytics(session: Session): Promise<any[]> {
+    try {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + session.token;
+      const response = await axios.get(this.baseUrl + "/api/spots/analytics/");
+      return response.data;
+    } catch (error) {
+      return [];
+    }
+  },
 };
