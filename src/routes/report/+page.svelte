@@ -1,5 +1,4 @@
 <script lang="ts">
-  // import { currentSession, subTitle, spotAnalytics } from "$lib/stores";
   import { currentSession, subTitle} from "$lib/stores";
   import { spotService } from "$lib/services/spot-service";
   import Card from "$lib/ui/Card.svelte";
@@ -14,14 +13,11 @@
 
 onMount(async () => {
     spots = await spotService.getSpots(get(currentSession));
-    // analytics = await spotService.getAnalytics(get(currentSession)) as any;
-    // spotAnalytics.set(analytics);
   });
 
 </script>
 
 <Card>
-  <!-- <Charts {analytics}/> -->
   <Charts />
 </Card>
 <Card>

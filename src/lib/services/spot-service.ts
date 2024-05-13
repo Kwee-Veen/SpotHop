@@ -42,6 +42,19 @@ export const spotService = {
     }
   },
 
+  /////////////////////////////////////////////////////////
+  // Check this works, especially the id in the HTTP bit //
+  /////////////////////////////////////////////////////////
+  async deleteSpot(id: String, session: Session) {
+    try {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + session.token;
+      const response = await axios.delete(this.baseUrl + `/api/spots/${id}`);
+      return response.status == 200;
+    } catch (error) {
+      return false;
+    }
+  },
+
   async getSpots(session: Session): Promise<Spot[]> {
     try {
       axios.defaults.headers.common["Authorization"] = "Bearer " + session.token;
