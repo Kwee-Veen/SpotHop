@@ -68,9 +68,6 @@
           }),
         };
         overlays = {
-          "Temperature Overlay": leaflet.tileLayer(`https://{s}.tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=0c109ad6bb8a0b5d8a284ce6061f12c6`, {
-            attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>'
-          }), 
           All_Spots,
           Sites,
           Locales,
@@ -79,6 +76,22 @@
           Structures,
           Shopping,
           Uncategorised,
+          "Show Temperature": leaflet.tileLayer(`https://{s}.tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=0c109ad6bb8a0b5d8a284ce6061f12c6`, {
+            attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>'
+          }), 
+          "Show Clouds": leaflet.tileLayer(`https://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png?appid=0c109ad6bb8a0b5d8a284ce6061f12c6`, {
+            attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>'
+          }), 
+          "Show Pressure": leaflet.tileLayer(`https://{s}.tile.openweathermap.org/map/pressure/{z}/{x}/{y}.png?appid=0c109ad6bb8a0b5d8a284ce6061f12c6`, {
+            attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>'
+          }), 
+          "Show Wind": leaflet.tileLayer(`https://{s}.tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=0c109ad6bb8a0b5d8a284ce6061f12c6`, {
+            attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>'
+          }), 
+          "Show Snow": leaflet.tileLayer(`https://{s}.tile.openweathermap.org/map/snow/{z}/{x}/{y}.png?appid=0c109ad6bb8a0b5d8a284ce6061f12c6`, {
+            attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>'
+          }), 
+
         };
 
         let defaultLayer = baseLayers[activeLayer];

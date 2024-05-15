@@ -1,6 +1,6 @@
 <script lang="ts">
   import Card from "$lib/ui/Card.svelte";
-  import { subTitle } from "$lib/stores";
+  import { latestSpot, subTitle } from "$lib/stores";
   import CreateSpotForm from "./CreateSpotForm.svelte";
   import SpotList from "$lib/ui/SpotList.svelte";
   import { onMount } from "svelte";
@@ -10,6 +10,15 @@
   let map: LeafletMap;
 
   subTitle.set("Create a Spot");
+
+  // $: {
+  //   console.log(data.spots[data.spots.length - 1]);
+  //   latestSpot.set(data.spots[data.spots.length - 1]);
+  //   console.log(latestSpot);
+  //   const popup = `Spot "${latestSpot.name}" (${latestSpot.latitude} ${latestSpot.longitude}), category: ${latestSpot.category}`;
+  //   map.addMarker(latestSpot.latitude, latestSpot.longitude, popup);
+  //   map.moveTo(latestSpot.latitude, latestSpot.longitude);
+  // }
 
   onMount(async () => {
     const leaflet = await import("leaflet");
