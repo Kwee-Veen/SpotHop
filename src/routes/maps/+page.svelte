@@ -1,29 +1,34 @@
 <script lang="ts">
     import Card from "$lib/ui/Card.svelte";
-    import { currentSession, subTitle } from "$lib/stores";
-    import { spotService } from "$lib/services/spot-service";
-
+    import { subTitle } from "$lib/stores";
     import LeafletMap from "$lib/ui/LeafletMap.svelte";
     import { onMount } from "svelte";
-    import type { Spot } from "$lib/types/spot-types";
-    import { get } from "svelte/store";
 
-    subTitle.set("Map of Spots");
+    subTitle.set("Spot Maps");
 
-    let map: LeafletMap;
+    export let data: any;
+    let map1: LeafletMap;
+    let map2: LeafletMap;
 
     onMount(async () => {
-        const spots = await spotService.getSpots(get(currentSession));
-        spots.forEach((spot: Spot) => {
-            const popup = `Spot "${spot.name}" (${spot.latitude} ${spot.longitude}), category: ${spot.category}`;
-            map.addMarker(spot.latitude, spot.longitude, popup);
-        });
-        const lastSpot = spots[spots.length - 1];
-        if (lastSpot) map.moveTo(lastSpot.latitude, lastSpot.longitude);
+      const leaflet = await import("leaflet");
+      const spots = data.spots;
+      const lastSpot = spots[spots.length - 1];
+      if (lastSpot) {
+        const popup = `Spot "${lastSpot.name}" (${lastSpot.latitude} ${lastSpot.longitude}), category: ${lastSpot.category}`;
+        map1.addMarker(lastSpot.latitude, lastSpot.longitude, popup);
+        map1.moveTo(lastSpot.latitude, lastSpot.longitude);
+        map2.addMarker(lastSpot.latitude, lastSpot.longitude, popup);
+        map2.moveTo(lastSpot.latitude, lastSpot.longitude);
+      }
     });
   </script>
   
   <Card>
-    <LeafletMap height={65} bind:this={map}/>
+    <LeafletMap height={65} bind:this={map1} data={data} id={"firstMap"} activeLayer = {"Transportation"} zoom={7}/>
   </Card>
+  <Card>
+    <LeafletMap height={65} bind:this={map2} data={data} id={"secondMap"} />
+  </Card>
+  
   

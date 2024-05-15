@@ -1,54 +1,37 @@
 <script lang="ts">
   import Card from "$lib/ui/Card.svelte";
-  import { currentSession, latestSpot, subTitle } from "$lib/stores";
+  import { subTitle } from "$lib/stores";
   import CreateSpotForm from "./CreateSpotForm.svelte";
   import SpotList from "$lib/ui/SpotList.svelte";
-
-  import type { Spot } from "$lib/types/spot-types";
   import { onMount } from "svelte";
-  import { spotService } from "$lib/services/spot-service";
-  import { get } from "svelte/store";
   import LeafletMap from "$lib/ui/LeafletMap.svelte";
 
-  let spots: Spot[] = [];
+  export let data: any;
   let map: LeafletMap;
 
   subTitle.set("Create a Spot");
 
-  latestSpot.subscribe(async (spot) => {
-    if (spot) {
-      spots.push(spot);
-      spots = [...spots];
-      map.moveTo(spot.latitude, spot.longitude);
-      const popup = `Spot "${spot.name}" (${spot.latitude} ${spot.longitude}), category: ${spot.category}`;
-      map.addMarker(spot.latitude, spot.longitude, popup);
-      spots = [];
-      spots.push(spot);
-    }
-  });
-
   onMount(async () => {
-      spots = await spotService.getSpots(get(currentSession));
-      spots.forEach((spot: Spot) => {
-          const popup = `Spot "${spot.name}" (${spot.latitude} ${spot.longitude}), category: ${spot.category}`;
-          map.addMarker(spot.latitude, spot.longitude, popup);
-      });
-      const lastSpot = spots[spots.length - 1];
-      if (lastSpot) map.moveTo(lastSpot.latitude, lastSpot.longitude);
-      spots = [];
-      spots.push(lastSpot);
+    const leaflet = await import("leaflet");
+    const spots = data.spots;
+    const lastSpot = spots[spots.length - 1];
+    if (lastSpot) {
+      const popup = `Spot "${lastSpot.name}" (${lastSpot.latitude} ${lastSpot.longitude}), category: ${lastSpot.category}`;
+      map.addMarker(lastSpot.latitude, lastSpot.longitude, popup);
+      map.moveTo(lastSpot.latitude, lastSpot.longitude);
+    }
   });
 </script>
 
 <div class="columns is-mobile is-centered">
   <div class="column is-6">
     <box class="box has-background-danger-light">
-      <CreateSpotForm />
+      <CreateSpotForm/>
     </box>
   </div>
   <div class="column is-6">
     <box class="box">
-      <LeafletMap height={43} activeLayer = "Terrain" bind:this={map}/>
+      <LeafletMap height={43} activeLayer = "Terrain" bind:this={map} data={data}/>
     </box>
   </div>
 </div>
@@ -57,14 +40,12 @@
   <div class="columns is-mobile is-centered">
     <div class="column is-3">
       <box class="box has-background-white">
-        <h2 class="h2 has-text-centered">Latest Spot</h2>
+        <h2 class="h2 has-text-centered">Spot List</h2>
       </box>
     </div>
   </div> 
-
-  <SpotList {spots}/>
+  <SpotList spots = {data.spots}/>
 </Card>
-
 
 <!-- <script>
     // // This may be unnecessary here; make a new folder for accounts, put this in there instead,

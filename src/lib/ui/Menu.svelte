@@ -16,7 +16,7 @@
           <a class="navbar-item" href="/create"> Create Spot</a>
           <a class="navbar-item" href="/report"> View Reports</a>
           <a class="navbar-item" href="/maps"> Maps </a>
-          <a class="navbar-item" href="/logout"> Logout {$currentSession.name}</a>
+          <a data-sveltekit-preload-data="tap" class="navbar-item" href="/logout"> Logout [{$currentSession?.name}]</a>
         </div>
         <div></div>
       </div>

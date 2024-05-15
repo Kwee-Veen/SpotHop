@@ -1,11 +1,12 @@
 <script lang='ts'>
-  import { spotService } from '$lib/services/spot-service';
-  import { currentSession } from '$lib/stores';
+  // import { spotService } from '$lib/services/spot-service';
+  // import { currentSession } from '$lib/stores';
   import type { Spot } from '$lib/types/spot-types';
   import { onMount } from 'svelte';
   import { Chart, type EChartsOptions } from 'svelte-echarts';
-  import { get } from 'svelte/store';
+  // import { get } from 'svelte/store';
 
+  export let data: any;
   let spotList: Spot[] = [];
   let options: EChartsOptions = {};
   let dataInput: any = [
@@ -19,8 +20,8 @@
   ]
 
 onMount(async () => {
-    const spots = await spotService.getSpots(get(currentSession)) as Spot[];
-    spotList = spots;
+    // const spots = await spotService.getSpots(get(currentSession)) as Spot[];
+    spotList = data.spots;
     spotList.forEach((spot) => {
       if (spot.category == "Site") {
         dataInput[0].value += 1;
