@@ -13,11 +13,15 @@
 
   // $: {
   //   console.log(data.spots[data.spots.length - 1]);
-  //   latestSpot.set(data.spots[data.spots.length - 1]);
-  //   console.log(latestSpot);
-  //   const popup = `Spot "${latestSpot.name}" (${latestSpot.latitude} ${latestSpot.longitude}), category: ${latestSpot.category}`;
-  //   map.addMarker(latestSpot.latitude, latestSpot.longitude, popup);
-  //   map.moveTo(latestSpot.latitude, latestSpot.longitude);
+  //   // latestSpot.set(data.spots[data.spots.length - 1]);
+  //   // console.log(latestSpot);
+  //   const newSpot = (data.spots[data.spots.length - 1]);
+  //   console.log(newSpot);
+  //   const popup = `Spot "${newSpot.name}" (${newSpot.latitude} ${newSpot.longitude}), category: ${newSpot.category}`;
+  //   if (map !== undefined) {
+  //     map.addMarker(newSpot.latitude, newSpot.longitude, popup);
+  //     map.moveTo(newSpot.latitude, newSpot.longitude);
+  //   }
   // }
 
   onMount(async () => {

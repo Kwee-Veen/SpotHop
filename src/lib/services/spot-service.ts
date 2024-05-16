@@ -40,6 +40,14 @@ export const spotService = {
     }
   },
 
+  async editSpot(oldSpot: Spot, newSpot: Spot) {
+    try {
+      spotStore.editSpot(oldSpot, newSpot);
+    } catch (error) {
+      return false;
+    }
+  },
+
   async deleteSpot(id: string) {
     try {
       await spotStore.deleteSpot(id);
@@ -55,6 +63,15 @@ export const spotService = {
       return JSON.parse(JSON.stringify(spots));
     } catch (error) {
       return [];
+    }
+  },
+
+  async getSpotById(id: string | any): Promise<Spot | null> {
+    try {
+      const spot = await spotStore.getSpotById(id);
+      return JSON.parse(JSON.stringify(spot));
+    } catch (error) {
+      return null;
     }
   },
 

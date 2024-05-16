@@ -99,7 +99,7 @@ function start () {
 
 <style>
   .app {
-    width: 40vw;
+    width: auto;
     height: 45vh;
   }
 </style>
