@@ -31,4 +31,15 @@ export const actions = {
     }
     return
   },
+
+  image: async ({ request, cookies }) => {
+    const cookieStr = cookies.get("spot-user") as string;
+    if (cookieStr) {
+      const form = await request.formData();
+      const id = form.get("spotImageId") as string;
+      console.log("Editing images of spot: " + id);
+      redirect(301, "/image/" + id);
+    }
+    return
+  },
 };

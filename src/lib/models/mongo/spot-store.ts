@@ -46,7 +46,7 @@ export const spotStore = {
     async getSpotById(id: string) {
         if (id) {
             try {
-                let foundSpot = await SpotMongoose.findOne({ _id: id }).lean();
+                let foundSpot = await SpotMongoose.findOne({ _id: id }).lean<Spot | null>();
                 if (foundSpot === undefined) foundSpot = null;
                 return foundSpot;
             } catch (error) {

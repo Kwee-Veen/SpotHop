@@ -17,6 +17,7 @@
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "^8.56.0",
 		"@types/leaflet": "^1.9.12",
+		"@types/node": "^20.12.12",
 		"@typescript-eslint/eslint-plugin": "^7.0.0",
 		"@typescript-eslint/parser": "^7.0.0",
 		"echarts": "^5.5.0",
@@ -31,11 +32,13 @@
 		"svelte-echarts": "^0.1.1",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
-		"vite": "^5.0.3"
+		"vite": "^5.0.3",
+		"vite-plugin-node-polyfills": "^0.21.0"
 	},
 	"type": "module",
 	"dependencies": {
 		"mongoose": "^8.3.5",
-		"npm-check-updates": "^16.14.20"
+		"npm-check-updates": "^16.14.20",
+		"svelte-cloudinary": "^1.3.2"
 	}
 }
