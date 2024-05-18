@@ -6,7 +6,7 @@ const { models } = pkg;
 const spotSchema = new Schema<Spot>({
     name: String,
     description: String,
-    img: String,
+    img: [],
     category: String,
     latitude: Number,
     longitude: Number,

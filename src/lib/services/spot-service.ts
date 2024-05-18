@@ -7,7 +7,7 @@ export const spotService = {
   async signup(user: User): Promise<boolean> {
     try {
       const newUser = await userStore.addUser(user);
-      return !!newUser;
+      return !newUser;
     } catch (error) {
       console.log(error);
       return false;

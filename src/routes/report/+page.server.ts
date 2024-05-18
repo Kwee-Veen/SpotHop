@@ -1,6 +1,7 @@
 import { spotService } from "$lib/services/spot-service";
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
+import { invalidateAll } from "$app/navigation";
 
 export const load: PageServerLoad = async ({ }) => {
   return {
@@ -37,7 +38,8 @@ export const actions = {
     if (cookieStr) {
       const form = await request.formData();
       const id = form.get("spotImageId") as string;
-      console.log("Editing images of spot: " + id);
+      const spot = await spotService.getSpotById(id);
+      console.log("Editing images of spot: " + spot?.name);
       redirect(301, "/image/" + id);
     }
     return

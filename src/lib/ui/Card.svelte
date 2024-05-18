@@ -1,4 +1,4 @@
-  <div class="card mb-5 has-background-info-light">
+  <div class="card has-background-info-light">
     <div class="card-content">
       <div class="content">
         <slot />

@@ -16,7 +16,7 @@ export interface Session {
   export interface Spot {
     name: string;
     description?: string;
-    img?: string;
+    img?: string[];
     category?: string;
     latitude: number;
     longitude: number;
