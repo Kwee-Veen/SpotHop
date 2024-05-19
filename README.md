@@ -1,38 +1,29 @@
 <h1>SpotHop</h1>
 
-![Readme_Image](https://github.com/Kwee-Veen/SpotHop/assets/118535981/ccf48c53-b5fc-4ff7-88d0-b55c095e4efa)
+![SH-2](https://github.com/Kwee-Veen/SpotHop-v2-svelte/assets/118535981/eb96b937-c128-44d6-9967-9526a911e227)
+<hr>
+
 
 SpotHop is a placemark-focused application, allowing creation and management of user-generated 'Spots'. <br>
 Users can sign up and log in, create and manage their own spots, and view those of other users. <br>
 Spots can include a name and description, a category, and lat/long coordinates. <br>
-Images can also be uploaded for spots, which are cloud-hosted (Cloudinary). 
-
-Analytics are generated for all saved spots, including a breakdown by spot category and user vs. global spots. <br>
-Searches can be performed to only display spots meeting specific criteria, including name, category, coordinates and user-generated. <br>
-User accounts can be deleted; the first user to be created is also designated as the admin, and can view, modify and delete all user accounts.
-
+Multiple images can also be uploaded (and deleted) for spots. 
 <hr>
 
-SpotHop is hosted by both Render:<br>
-    _https://spothop.onrender.com/_ <br>
-and Glitch:<br>
-    _https://spothop.glitch.me/_ <br>
-
-
-Spothop is also a REST API; users and spots can be created, found and deleted through HTTP requests.<br>
-The API is supported by Swagger 2.0 documentation, with descriptions of all API functions and secure testing facilitated.<br>
-Spothop is secured using cookie authentication (web app) and JSON Web Token JWT authentication (API).
-
+![SH-1](https://github.com/Kwee-Veen/SpotHop-v2-svelte/assets/118535981/2aa057ef-b1aa-41b3-8ec7-0f30c7fc638b)
+<hr>
+5-day temperature forecasts and analytics are generated for all saved spots, including dynamic graph breakdowns of spots by user or category.<br>
+Spots are automatically mapped, and maps can be filtered by category. Maps also feature weather overlays for temp, wind, pressure, snow etc. <br>
 <hr>
 
-Test-driven development was employed in building SpotHop, and a full suite of tests for both the web app and API are provided.
+![SH-3](https://github.com/Kwee-Veen/SpotHop-v2-svelte/assets/118535981/788fd013-f26d-4039-b2ee-e7c8dbcf03b5)
+<hr>
 
-SpotHop's default persistence route is MongoDB, cloud-hosted (Cloud Atlas), 
-JSON persistence can be employed by tweaking the src/server.js file from:<br>  
-  **db.init("mongo");** <br>
-to:<br>
-    **db.init();** <br>
-    
+SpotHop is hosted on Vercel: _https://spot-hop-v2-svelte.vercel.app_ <br>
+
+Spothop is secured using cookies, I/O validation & sanitization, and password hashing & salting.<br>
+SpotHop's database is MongoDB, cloud-hosted on Cloud Atlas, with image hosting provided by Cloudinary.
+
 <hr>
 
 The following environmental variables must be specified in order to reproduce this web app: <br>
@@ -42,5 +33,6 @@ The following environmental variables must be specified in order to reproduce th
     _cloudinary_name (String - Cloudinary credentials)_ <br>
     _cloudinary_key (String - Cloudinary credentials)_ <br>
     _cloudinary_secret (String - Cloudinary credentials)_ <br>
+     _cloudinary_preset (String - Cloudinary credentials)_ <br>
     
 <hr>
