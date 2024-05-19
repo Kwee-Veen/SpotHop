@@ -9,6 +9,7 @@ export interface Session {
     lastName: string;
     email: string;
     password: string;
+    hash: string;
     _id?: string;
     admin: boolean;
   }

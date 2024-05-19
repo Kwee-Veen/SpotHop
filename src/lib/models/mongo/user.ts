@@ -9,6 +9,7 @@ const userSchema = new Schema<User>({
   email: String,
   password: String,
   admin: Boolean,
+  hash: String,
 });
 
 export const UserMongoose = models["User"] || model("User", userSchema);
