@@ -11,6 +11,7 @@
 
   subTitle.set("Create a Spot");
 
+  // Towards making the map responsive to new spot additions (without page refresh)
   // $: {
   //   console.log(data.spots[data.spots.length - 1]);
   //   // latestSpot.set(data.spots[data.spots.length - 1]);
@@ -35,28 +36,18 @@
     }
   });
 </script>
-
-<div class="columns is-mobile is-centered">
-  <div class="column is-6">
-    <box class="box has-background-danger-light">
-      <CreateSpotForm/>
-    </box>
-  </div>
-  <div class="column is-6">
-    <box class="box">
-      <LeafletMap height={43} activeLayer = "Terrain" bind:this={map} data={data}/>
-    </box>
-  </div>
-</div>
-
 <Card>
   <div class="columns is-mobile is-centered">
-    <div class="column is-3">
-      <box class="box has-background-white">
-        <h2 class="h2 has-text-centered">Spot List</h2>
-      </box>
+    <div class="column is-6">
+        <LeafletMap height={43} activeLayer = "Terrain" bind:this={map} data={data}/>
     </div>
-  </div> 
+    <div class="column is-6">
+        <CreateSpotForm/>
+    </div>
+  </div>
+</Card>
+
+<Card>
   <SpotList spots = {data.spots}/>
 </Card>
 

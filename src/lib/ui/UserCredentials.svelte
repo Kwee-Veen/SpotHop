@@ -7,7 +7,7 @@
   <!-- svelte-ignore a11y-label-has-associated-control -->
   <label class="label">Email</label>
   <div class="control has-icons-left">
-    <input bind:value={email} class="input" type="text" placeholder="Email" name="email" />
+    <input bind:value={email} class="input" type="email" placeholder="Email" name="email" />
     <span class="icon is-small is-left">
       <i class="fa fa-envelope"></i>
     </span>

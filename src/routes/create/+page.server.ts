@@ -1,7 +1,8 @@
 import { spotService } from "$lib/services/spot-service";
-import type { Session } from "$lib/types/spot-types";
+import type { Session, Spot } from "$lib/types/spot-types";
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
+import validator from 'validator';
 
 export const ssr = false;
 
@@ -12,21 +13,39 @@ export const load: PageServerLoad = async ({ }) => {
 };
 
 export const actions = {
+
+  // validate user input (strings only)
+  // Use right hand side for reference
+
   create: async ({ request, cookies }) => {
     const cookieStr = cookies.get("spot-user") as string;
     if (cookieStr) {
       const session = JSON.parse(cookieStr) as Session;
       if (session) {
         const form = await request.formData();
-        const spot = {
-          name: form.get("name") as unknown as string,
+        const spot: Spot | any = {
+          name: '' as string,
           category: form.get("category") as string,
           latitude: form.get("latitude") as unknown as number,
           longitude: form.get("longitude") as unknown as number,
-          description: form.get("description") as unknown as string,
+          description: '' as string,
           userid: session._id
         };
-        spotService.createSpot(spot);
+        let name = form.get("name") as unknown as string;
+        let description = form.get("description") as unknown as string;
+        let errorFlag = false;
+        if (validator.isAlphanumeric(name, 'en-US', { ignore: ' '} )) spot.name = name; else {
+          console.log("Name " + name + " has invalid characters. Spot not created.");
+          errorFlag = true;
+        }
+        if (validator.isAlphanumeric(description, 'en-US', { ignore: ' '} )) spot.description = description; else {
+          console.log("Description " + description + " has invalid characters. Spot not created.");
+          errorFlag = true;
+        }
+        if (!errorFlag) {
+          spotService.createSpot(spot);
+        }
+        else console.log("Did not create new spot because reasons");
       }
     }
   },

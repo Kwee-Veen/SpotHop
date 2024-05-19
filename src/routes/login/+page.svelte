@@ -9,8 +9,11 @@
         <h3 class="title has-text-black has-text-centered">Login to SpotHop</h3>
         <div class="box">
           <LoginForm />
+          <br>
+          <p class="has-text-centered">Don't have an account? <a href="/signup" data-cy="login-redirect">Create One Here</a></p>
         </div>
       </div>
+      
     </div>
   </div>
 </section>

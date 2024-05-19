@@ -24,11 +24,7 @@
     });
   </script>
   
-  <Card>
-    <LeafletMap height={65} bind:this={map1} data={data} id={"firstMap"} activeLayer = {"Transportation"} zoom={7}/>
-  </Card>
-  <Card>
-    <LeafletMap height={65} bind:this={map2} data={data} id={"secondMap"} />
-  </Card>
+    <LeafletMap height={75} bind:this={map1} data={data} id={"firstMap"} activeLayer = {"Transportation"} zoom={7}/>
+    <LeafletMap height={75} bind:this={map2} data={data} id={"secondMap"} />
   
   

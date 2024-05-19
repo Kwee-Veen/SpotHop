@@ -2,7 +2,7 @@
   import { subTitle } from "$lib/stores";
 </script>
   
-<div class="box has-background-link-dark">
+<div class="box has-background-link-dark mb-2 p-4">
   <div class="columns is-mobile has-text-centered has-text-black">
     <div class="column is-2"></div>
     <div class="column is-1">

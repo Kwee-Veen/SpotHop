@@ -8,11 +8,21 @@
   export let spots = [];
 </script>
 
+<div class="columns is-mobile is-centered">
+  <div class="column is-narrow">
+    <div class= "box has-background-link-dark pb-2 pr-6 pl-6">
+      <h2 class="text has-text-centered has-text-white">Spot List</h2>
+    </div>
+  </div>
+</div>
 <section class="content box p-2 ">
+  
   {#each spots as spot}
-    <div class="box has-background-success-light mb-3">
+    <div class="box has-background-warning-light mb-3 pr-2 pl-2 pt-5">
       <div class="columns">
         <div class="column is-6">
+          <div class="box has-background-white p-3">
+          <div class="box has-background-info-light">
           <div class="box">
             <table>
               <tr>
@@ -112,12 +122,14 @@
             </div>
           </div>
         </div>
+        </div>
+        </div>
         {#if spot.img}
         <div class="columns is-multiline is-mobile">
           {#each spot.img as image}
 
             <div class="column is-6">
-              <div class="box p-2">
+              <div class="box p-3">
                 <img src={image} class="image " alt="uploaded spot"/>
               </div>
             </div>
