@@ -22,13 +22,41 @@ const credentials = {
 };
 cloudinary.config(credentials);
 
+let weatherTrends: any;
+
 export const load: PageServerLoad = async ({ cookies, params }) => {
   const cookieStr = cookies.get("spot-user") as string;
   if (cookieStr) {
     id = encodeURI(params.id);
     spot = await spotService.getSpotById(id);
+
+    let data: any;
+
+    if (spot) {
+      const lat = spot.latitude;
+      const long = spot.longitude;
+      const apiKey = "0c109ad6bb8a0b5d8a284ce6061f12c6";
+      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=` + lat + `&lon=` + long + `&appid=` + apiKey;
+      const search = await fetch(url);
+      data = await search.json();
+      let trends: any = {
+        tempTrend: [],
+        trendLabels: [],
+      };
+      let j = 0;
+      for (let i = 0; i < data.list.length; i += 1) {
+        let tempTrend = ((data.list[i].main.temp) - 273.15).toFixed(1);
+        if (tempTrend) trends.tempTrend.push(tempTrend);
+        const date = data.list[i].dt_txt;
+        trends.trendLabels.push(`${date}`);
+        j++;
+      }
+      weatherTrends = trends;
+    }
+
     return {
       spot: spot,
+      weatherTrends: weatherTrends,
       cloudinary_name: cloudinary_name,
       cloudinary_preset: cloudinary_preset,
       cloudinary_key: cloudinary_key,
@@ -78,5 +106,5 @@ export const actions = {
       }
       redirect(301, "/report");
     }
-  }
+  },
 };

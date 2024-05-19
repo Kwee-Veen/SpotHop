@@ -14,9 +14,6 @@ export const load: PageServerLoad = async ({ }) => {
 
 export const actions = {
 
-  // validate user input (strings only)
-  // Use right hand side for reference
-
   create: async ({ request, cookies }) => {
     const cookieStr = cookies.get("spot-user") as string;
     if (cookieStr) {

@@ -26,7 +26,7 @@
     </div>
     <br>
     <div class="text has-text-centered">
-      <button class="button is-danger is-rounded has-text-weight-bold is-size-5">Create Spot</button>
+      <button class="button is-warning is-rounded has-text-weight-bold is-size-5">Create Spot</button>
     </div>
     <br>
     <div class="columns is-mobile is-centered">

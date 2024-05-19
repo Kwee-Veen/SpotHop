@@ -1,7 +1,6 @@
 import { spotService } from "$lib/services/spot-service";
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import { invalidateAll } from "$app/navigation";
 
 export const load: PageServerLoad = async ({ }) => {
   return {

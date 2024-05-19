@@ -30,7 +30,6 @@ export const actions = {
         });
         throw redirect(303, "/report");
       }
-
     }
   }
 };

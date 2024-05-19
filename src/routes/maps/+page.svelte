@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Card from "$lib/ui/Card.svelte";
     import { subTitle } from "$lib/stores";
     import LeafletMap from "$lib/ui/LeafletMap.svelte";
     import { onMount } from "svelte";

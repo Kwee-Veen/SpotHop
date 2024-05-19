@@ -1,6 +1,6 @@
 <script lang="ts">
   import Card from "$lib/ui/Card.svelte";
-  import { latestSpot, subTitle } from "$lib/stores";
+  import { subTitle } from "$lib/stores";
   import CreateSpotForm from "./CreateSpotForm.svelte";
   import SpotList from "$lib/ui/SpotList.svelte";
   import { onMount } from "svelte";
@@ -10,20 +10,6 @@
   let map: LeafletMap;
 
   subTitle.set("Create a Spot");
-
-  // Towards making the map responsive to new spot additions (without page refresh)
-  // $: {
-  //   console.log(data.spots[data.spots.length - 1]);
-  //   // latestSpot.set(data.spots[data.spots.length - 1]);
-  //   // console.log(latestSpot);
-  //   const newSpot = (data.spots[data.spots.length - 1]);
-  //   console.log(newSpot);
-  //   const popup = `Spot "${newSpot.name}" (${newSpot.latitude} ${newSpot.longitude}), category: ${newSpot.category}`;
-  //   if (map !== undefined) {
-  //     map.addMarker(newSpot.latitude, newSpot.longitude, popup);
-  //     map.moveTo(newSpot.latitude, newSpot.longitude);
-  //   }
-  // }
 
   onMount(async () => {
     const leaflet = await import("leaflet");
@@ -36,16 +22,18 @@
     }
   });
 </script>
-<Card>
-  <div class="columns is-mobile is-centered">
-    <div class="column is-6">
+<div class="columns is-mobile is-centered">
+  <div class="column is-8">
+<div class="box has-background-warning">
+  
+    <!-- <div class="column is-6">
         <LeafletMap height={43} activeLayer = "Terrain" bind:this={map} data={data}/>
-    </div>
-    <div class="column is-6">
+    </div> -->
+    
         <CreateSpotForm/>
-    </div>
-  </div>
-</Card>
+      </div>
+</div>
+</div>
 
 <Card>
   <SpotList spots = {data.spots}/>

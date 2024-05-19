@@ -9,7 +9,7 @@
 
 </script>
 
-<Card>
+<div class="box has-background-link-dark pt-5 pb-5">
   <div class="columns is-mobile">
     <div class="column is-half">
       <div class="card">
@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-</Card>
+</div>
 <Card>
   <SpotList spots={data.spots}/>
 </Card>
