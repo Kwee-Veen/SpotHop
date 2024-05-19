@@ -57,7 +57,7 @@
       <LeafletMap
         height={44}
         zoom={7}
-        activeLayer="Terrain"
+        activeLayer="Transportation"
         bind:this={map}
         {data}
       />

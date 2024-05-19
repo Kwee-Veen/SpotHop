@@ -16,7 +16,7 @@
         <div class="columns is-mobile is-centered">
           <div class="column is-narrow">
             <div class= "box has-background-link-dark pb-2">
-              <h4 class="text has-text-centered has-text-white">Spots by Category</h4>
+              <h4 class="text has-text-centered has-text-white has-text-weight-bold">Spots by Category</h4>
             </div>
           </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="columns is-mobile is-centered">
           <div class="column is-narrow">
             <div class= "box has-background-link-dark pb-2">
-              <h4 class="text has-text-centered has-text-white">Spots by User</h4>
+              <h4 class="text has-text-centered has-text-white has-text-weight-bold">Spots by User</h4>
             </div>
           </div>
         </div>

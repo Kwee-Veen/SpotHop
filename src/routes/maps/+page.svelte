@@ -23,7 +23,7 @@
     });
   </script>
   
-    <LeafletMap height={75} bind:this={map1} data={data} id={"firstMap"} activeLayer = {"Transportation"} zoom={7}/>
-    <LeafletMap height={75} bind:this={map2} data={data} id={"secondMap"} />
+    <LeafletMap height={75} bind:this={map1} data={data} id={"firstMap"}  zoom={7}/>
+    <LeafletMap height={75} bind:this={map2} data={data} activeLayer = {"Transportation"} id={"secondMap"} />
   
   
