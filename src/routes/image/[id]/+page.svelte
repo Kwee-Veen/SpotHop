@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
   import ForecastChart from "$lib/ui/ForecastChart.svelte";
   import LeafletMap from "$lib/ui/LeafletMap.svelte";
+    import { cloudinary_name, cloudinary_preset } from "$env/static/private";
   subTitle.set("Weather & Images");
 
   export let widget: any;
@@ -25,8 +26,8 @@
       // @ts-ignore
       widget = window.cloudinary.createUploadWidget(
         {
-          cloudName: "dx2zbn7jb",
-          uploadPreset: "cvcdhrcq",
+          cloudName: cloudinary_name,
+          uploadPreset: cloudinary_preset,
         },
         (error: any, result: any) => {
           console.log(result);
