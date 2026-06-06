@@ -11,6 +11,12 @@
   }
 </script>
 
+<style>
+  :global(body) {
+    font-family: 'PatrickHand', sans-serif;
+  }
+</style>
+
 <div class="container">
   {#if $currentSession.token}
     <Menu />

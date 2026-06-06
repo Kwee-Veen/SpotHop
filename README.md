@@ -19,10 +19,10 @@ Spots are automatically mapped, and maps can be filtered by category. Maps also 
 ![SH-3](https://github.com/Kwee-Veen/SpotHop-v2-svelte/assets/118535981/788fd013-f26d-4039-b2ee-e7c8dbcf03b5)
 <hr>
 
-SpotHop is hosted on Vercel: _https://spot-hop-v2-svelte.vercel.app_ <br>
+<a href="https://spothop.vercel.app/">SpotHop is hosted on Vercel</a><br>
+SpotHop's database is MongoDB Cloud, with image hosting provided by Cloudinary.<br>
 
-Spothop is secured using cookies, I/O validation & sanitization, and password hashing & salting.<br>
-SpotHop's database is MongoDB, cloud-hosted on Cloud Atlas, with image hosting provided by Cloudinary.
+Spothop is secured using cookies, I/O validation & sanitization, and password hashing & salting.
 
 <hr>
 
@@ -36,3 +36,5 @@ The following environmental variables must be specified in order to reproduce th
      _cloudinary_preset (String - Cloudinary credentials)_ <br>
     
 <hr>
+
+This project uses the font <a href="https://fonts.google.com/specimen/Patrick+Hand?preview.script=Latn">Patrick Hand</a>, licensed under the SIL Open Font License, Version 1.1. Copyright (c) 2010-2012 Patrick Wagesreiter (mail@patrickwagesreiter.at).
