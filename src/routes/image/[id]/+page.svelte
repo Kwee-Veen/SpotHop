@@ -10,6 +10,8 @@
   export let imageFiles: any;
   export let data: any;
   let spot = data.spot;
+  const cloudinary_name = data.cloudinary_name;
+  const cloudinary_preset = data.cloudinary_preset;
   let returnedURL: string;
   let map: LeafletMap;
 
@@ -25,8 +27,8 @@
       // @ts-ignore
       widget = window.cloudinary.createUploadWidget(
         {
-          cloudName: "dx2zbn7jb",
-          uploadPreset: "cvcdhrcq",
+          cloudName: cloudinary_name,
+          uploadPreset: cloudinary_preset,
         },
         (error: any, result: any) => {
           console.log(result);

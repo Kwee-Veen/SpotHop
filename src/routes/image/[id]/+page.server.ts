@@ -55,12 +55,10 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
     }
 
     return {
-      spot: spot,
-      weatherTrends: weatherTrends,
-      cloudinary_name: cloudinary_name,
-      cloudinary_preset: cloudinary_preset,
-      cloudinary_key: cloudinary_key,
-      cloudinary_secret: cloudinary_secret,
+      spot,
+      weatherTrends,
+      cloudinary_name,
+      cloudinary_preset
     }
   }
 };
