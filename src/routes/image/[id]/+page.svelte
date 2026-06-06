@@ -4,12 +4,13 @@
   import { onMount } from "svelte";
   import ForecastChart from "$lib/ui/ForecastChart.svelte";
   import LeafletMap from "$lib/ui/LeafletMap.svelte";
-    import { cloudinary_name, cloudinary_preset } from "$env/static/private";
+
   subTitle.set("Weather & Images");
 
   export let widget: any;
   export let imageFiles: any;
   export let data: any;
+  
   let spot = data.spot;
   const cloudinary_name = data.cloudinary_name;
   const cloudinary_preset = data.cloudinary_preset;
